@@ -68,8 +68,9 @@ class List extends React.Component
 {
   componentDidMount ()
   {
-    document.getElementById('app').classList.remove ('invisible');
-    document.querySelector ('a').classList.remove ('invisible');
+    document.querySelectorAll('.invisible').forEach (elem =>
+      elem.classList.remove ('invisible')
+    );
   }
   remove = (id) =>
   {
