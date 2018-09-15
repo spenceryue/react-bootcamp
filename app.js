@@ -146,7 +146,7 @@ class List extends React.Component
     const elemProps = { remove: this.remove, toggle: this.toggle };
 
     return (
-      <div>
+      <div className='List'>
         <h1>Friends List</h1>
         <AddItem add={ this.add } />
         <h2>Active</h2>
@@ -162,7 +162,7 @@ function ListView ({items, elemType, elemProps})
 {
   LOG ('rendering ListView')
   return (
-    <div className='list'>
+    <div className='ListView'>
     {
       items.map (item =>
         React.createElement (elemType, {...item, ...elemProps, key: item.id})

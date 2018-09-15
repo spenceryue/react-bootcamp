@@ -8,7 +8,7 @@
   <style>
   *
   {
-    transition: opacity .3s;
+    transition: all .3s;
   }
   #app
   {
@@ -61,10 +61,35 @@
     height: 6vh;
     margin-right: 5px;
   }
-  .list
+  .List
   {
-    max-height: 19vh;
+    display: flex;
+    flex-direction: column;
+    max-height: 70vh;
+  }
+  .ListView
+  {
+    position: relative;
+    overflow-x: hidden;
     overflow-y: auto;
+    flex-grow: 1;
+  }
+  .ListView::-webkit-scrollbar
+  {
+    width: .4rem;
+  }
+  .ListView::-webkit-scrollbar,
+  .ListView::-webkit-scrollbar-thumb
+  {
+    border-radius: 4px;
+  }
+  .ListView::-webkit-scrollbar-thumb
+  {
+    background-color: rgba(0,0,0,.1);
+  }
+  .ListView:hover::-webkit-scrollbar-thumb
+  {
+    background-color: rgba(0,0,0,.2);
   }
 </style>
 </head>
