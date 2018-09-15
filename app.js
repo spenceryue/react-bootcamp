@@ -24,7 +24,7 @@ class Friend extends React.Component
   {
     this.setState ({ hoverRemove: value });
   };
-  render (rem)
+  render ()
   {
     const color = ['gray', 'blue'];
     const active = Number (this.props.active);
@@ -69,6 +69,7 @@ class List extends React.Component
   componentDidMount ()
   {
     document.getElementById('app').classList.remove ('invisible');
+    document.querySelector ('a').classList.remove ('invisible');
   }
   remove = (id) =>
   {

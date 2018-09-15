@@ -6,6 +6,10 @@
   <script crossorigin src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'></script>
   <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
   <style>
+  *
+  {
+    transition: opacity .3s;
+  }
   #app
   {
     border: 1px solid gray;
@@ -26,7 +30,6 @@
   :root
   {
     font-family: Calibri;
-    transition: opacity .3s;
   }
   .invisible
   {
@@ -38,7 +41,7 @@
   }
   a
   {
-    opacity: .5;
+    opacity: .3;
     text-decoration: none;
     line-height: 50px;
     height: 50px;
@@ -53,6 +56,8 @@
   }
   img
   {
+    width: 50px;
+    height: 50px;
     margin-right: 5px;
   }
 </style>
@@ -60,7 +65,7 @@
 <body>
   <div id='app' class='invisible'>
   </div>
-  <a href='https://github.com/spenceryue/react-bootcamp'><img src='https://widget.battleforthenet.com/iframe/images/github.svg' width='50px' height='50px'> github repo</a>
+  <a class='invisible' href='https://github.com/spenceryue/react-bootcamp'><img src='https://widget.battleforthenet.com/iframe/images/github.svg'> github repo</a>
   <script type='text/babel' src='app.js'></script>
 </body>
 </html>
