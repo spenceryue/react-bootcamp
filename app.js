@@ -107,7 +107,7 @@ class List extends React.Component
       },
       {
         id: 'Kazuki',
-        active: true,
+        active: false,
       },
     ],
   };
@@ -137,6 +137,10 @@ class List extends React.Component
       })
     );
   };
+  clearAll = () =>
+  {
+    this.setState ({items: []});
+  }
 
   render ()
   {
@@ -153,6 +157,7 @@ class List extends React.Component
         <ListView items={ active } elemType={ elemType } elemProps={ elemProps } />
         <h2>Inactive</h2>
         <ListView items={ inactive } elemType={ elemType } elemProps={ elemProps } />
+        <button onClick={ this.clearAll } disabled={ !this.state.items.length }>Clear All</button>
       </div>
     );
   }
