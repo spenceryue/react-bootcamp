@@ -14,7 +14,6 @@
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
-    transition: opacity .3s;
     opacity: 1;
   }
   input[type=text]
@@ -27,15 +26,41 @@
   :root
   {
     font-family: Calibri;
+    transition: opacity .3s;
   }
   .invisible
   {
     opacity: 0 !important;
   }
+  a:hover
+  {
+    opacity: 1;
+  }
+  a
+  {
+    opacity: .5;
+    text-decoration: none;
+    line-height: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /*border: 1px solid blue;*/
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  img
+  {
+    margin-right: 5px;
+  }
 </style>
 </head>
 <body>
-  <div id='app' class='invisible'></div>
+  <div id='app' class='invisible'>
+  </div>
+  <a href='https://github.com/spenceryue/react-bootcamp'><img src='https://widget.battleforthenet.com/iframe/images/github.svg' width='50px' height='50px'> github repo</a>
   <script type='text/babel' src='app.js'></script>
 </body>
 </html>
