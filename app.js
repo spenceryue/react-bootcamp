@@ -162,7 +162,7 @@ function ListView ({items, elemType, elemProps})
 {
   LOG ('rendering ListView')
   return (
-    <div>
+    <div className='list'>
     {
       items.map (item =>
         React.createElement (elemType, {...item, ...elemProps, key: item.id})
