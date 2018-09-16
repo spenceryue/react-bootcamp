@@ -1,3 +1,5 @@
+// import Loader from 'loader.js';
+
 const time = () => {
   const d = new Date ();
   const h = d.getHours ();
@@ -32,28 +34,17 @@ class Friend extends React.Component
     const activeIndex = this.state.hoverActive ? 1 - active : active;
     const removeIcon = ['❌', '💀'][removeIndex];
     const activeIcon = ['💩', '🔥'][activeIndex];
-    const style = {
-      border: '1px solid gray',
-      borderRadius: '50%',
-      width: '1.5rem',
-      height: '1.5rem',
-      fontSize: '1rem',
-      lineHeight: '1.5rem',
-      display: 'inline-block',
-      textAlign: 'center',
-      marginLeft: '5px',
-    };
 
     return (
       <div style={ {color: color[active], paddingBottom: '5px'} }>
         { this.props.id }
-        <span style={ style }
+        <span className='icon'
           onClick={ () => this.props.toggle (this.props.id) }
           onMouseEnter={ () => this.hoverActive (true) }
           onMouseLeave={ () => this.hoverActive (false) }>
           { activeIcon }
         </span>
-        <span style={ style }
+        <span className='icon'
           onClick={ () => this.props.remove (this.props.id) }
           onMouseEnter={ () => this.hoverRemove (true) }
           onMouseLeave={ () => this.hoverRemove (false) }>
@@ -68,9 +59,14 @@ class List extends React.Component
 {
   componentDidMount ()
   {
-    document.querySelectorAll('.invisible').forEach (elem =>
+    document.querySelectorAll ('.invisible').forEach (elem =>
       elem.classList.remove ('invisible')
     );
+
+    API.fetch ()
+      .then ( items =>
+        this.setState ({ items, loading: false })
+      );
   }
   remove = (id) =>
   {
@@ -80,36 +76,8 @@ class List extends React.Component
     }));
   };
   state = {
-    items: [
-      {
-        id: 'Michiru',
-        active: true,
-      },
-      {
-        id: 'Yuuji',
-        active: true,
-      },
-      {
-        id: 'Makina',
-        active: true,
-      },
-      {
-        id: 'Amane',
-        active: true,
-      },
-      {
-        id: 'Yumiko',
-        active: true,
-      },
-      {
-        id: 'Sachi',
-        active: true,
-      },
-      {
-        id: 'Kazuki',
-        active: false,
-      },
-    ],
+    items: [],
+    loading: true,
   };
   add = (id) =>
   {
@@ -149,14 +117,24 @@ class List extends React.Component
     const elemType = this.props.elemType;
     const elemProps = { remove: this.remove, toggle: this.toggle };
 
+    const loaderStyles = { margin: '10px auto' };
+
     return (
       <div className='List'>
         <h1>Friends List</h1>
         <AddItem add={ this.add } />
         <h2>Active</h2>
-        <ListView items={ active } elemType={ elemType } elemProps={ elemProps } />
+        {
+          this.state.loading
+            ? <Loader style={ loaderStyles }/>
+            : <ListView items={ active } elemType={ elemType } elemProps={ elemProps } />
+        }
         <h2>Inactive</h2>
-        <ListView items={ inactive } elemType={ elemType } elemProps={ elemProps } />
+        {
+          this.state.loading
+            ? <Loader style={ loaderStyles } animation={ {offset: Math.PI * 2 * .33} }/>
+            : <ListView items={ inactive } elemType={ elemType } elemProps={ elemProps } />
+        }
         <button onClick={ this.clearAll } disabled={ !this.state.items.length }>Clear All</button>
       </div>
     );
