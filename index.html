@@ -29,7 +29,9 @@
   }
   :root
   {
+    /*border: 1px solid blue;*/
     font-family: Calibri;
+    margin: 0;
   }
   .invisible
   {
@@ -51,8 +53,7 @@
     /*border: 1px solid blue;*/
     position: absolute;
     bottom: 2.5vh;
-    left: 50%;
-    transform: translateX(-50%);
+    left: 2.5vh;
     z-index: -1;
   }
   img
@@ -96,7 +97,10 @@
 <body>
   <div id='app' class='invisible'>
   </div>
-  <a class='invisible' href='https://github.com/spenceryue/react-bootcamp'><img src='https://widget.battleforthenet.com/iframe/images/github.svg'> github repo</a>
+  <a class='invisible' href='https://github.com/spenceryue/react-bootcamp'>
+    <img src='https://widget.battleforthenet.com/iframe/images/github.svg'>
+    GitHub
+  </a>
   <script type='text/babel' src='app.js'></script>
 </body>
 </html>
