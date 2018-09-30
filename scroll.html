@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Scrollbar</title>
+  <script crossorigin src='https://unpkg.com/react@16/umd/react.development.js'></script>
+  <script crossorigin src='https://unpkg.com/react-dom@16/umd/react-dom.development.js'></script>
+  <script src='https://unpkg.com/babel-standalone@6/babel.min.js'></script>
+  <style>
+  *
+  {
+    box-sizing: border-box;
+    transition: all .3s;
+
+    transform-style: preserve-3d;
+  }
+
+  #app
+  {
+    border: 10px solid red;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+  }
+
+  body
+  {
+    margin: 0;
+    border: 5px solid green;
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+  }
+
+  .invisible
+  {
+    opacity: 0 !important;
+  }
+
+  .scrollable
+  {
+    overflow: auto;
+  }
+
+  .context
+  {
+    perspective: 1px;
+    perspective-origin: center;
+  }
+
+  /*::-webkit-scrollbar
+  {
+    width: .4rem;
+  }
+
+  ::-webkit-scrollbar,
+  ::-webkit-scrollbar-thumb
+  {
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb
+  {
+    background-color: rgba(0,0,0,.1);
+  }
+
+  *:hover::-webkit-scrollbar-thumb
+  {
+    background-color: rgba(0,0,0,.2);
+  }*/
+  p
+  {
+    font-size: 25rem;
+    white-space: nowrap;
+  }
+  .box
+  {
+    border: 2px solid blue;
+  }
+</style>
+</head>
+<body>
+  <div id='app' class='scrollable'>
+    <div class='box'>hi <img src='https://i.ytimg.com/vi/5CjA4W6BJeU/hqdefault.jpg'></div>
+    <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+  </div>
+  <script type='text/babel' src='scrollbar.js'></script>
+</body>
+</html>

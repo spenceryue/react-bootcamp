@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<style>
+  *
+  {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  div {
+    width: 500px;
+    height: 500px;
+    border: 1px solid blue;
+  }
+  .view {
+    position: relative;
+    perspective: 1px;
+    perspective-origin: top right;
+    overflow: scroll;
+    font-size: 0;
+  }
+  .bar {
+    /*position: fixed;*/
+    position: absolute;
+    /*position: sticky;*/
+    top: 0;
+    right: 0;
+    /*left:0;*/
+    background-color: red;
+    transform-origin: top right;
+    /*transform:
+      matrix3d(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, -1
+      )
+      translateZ(-2px);*/
+    width: 30px;
+    /*height: 100px;*/
+  }
+  .spacer {
+    display: block;
+    height: 1300px;
+    width: 1000px;
+  }
+  ::-webkit-scrollbar
+  {
+    width: 0rem;
+    height: 0rem;
+  }
+  .mybar
+  {
+    --progress: 0;
+    --stride: 1px;
+    position: fixed;
+    left: 0;
+    top: calc(var(--progress) * var(--stride));
+    width: 30px;
+    height: 192px;
+    background-color: blue;
+    border-radius: 15px;
+  }
+</style>
+<div class="view">
+  <div class="bar"></div>
+  <span class="spacer"></span>
+</div>
+<div class="mybar"></div>
+<script>
+  const view = document.querySelector('.view');
+  const bar = document.querySelector('.bar');
+  const viewHeight = view.getBoundingClientRect().height;
+  const barHeight = viewHeight * viewHeight / view.scrollHeight;
+  const factor = (viewHeight - barHeight)/(view.scrollHeight - viewHeight);
+  bar.style.height = barHeight + 'px';
+  bar.style.right = (view.clientWidth - view.getBoundingClientRect().width) + 'px';
+  bar.style.transform = `
+    matrix3d(
+      1, 0, 0, 0,
+      0, 1, 0, 0,
+      0, 0, 1, 0,
+      0, 0, 0, -1
+    )
+    scale(${1/factor})
+    translateZ(${1 - 1/factor}px)
+    translateZ(-2px)
+  `;
+</script>
+<script>
+  const mybar = document.querySelector ('.mybar');
+  const stride = (view.clientHeight - mybar.clientHeight) / 100;
+  mybar.style.setProperty ('--stride', `${stride}px`);
+  let count = 0;
+  let ready = true;
+  const scrollUpdate = () =>
+  {
+    const [A, B] = [view.scrollWidth - view.clientWidth, view.scrollHeight - view.clientHeight];
+    const [a, b] = [view.scrollLeft/A, view.scrollTop/B];
+    console.log (a.toFixed (2), b.toFixed (2));
+    mybar.style.setProperty ('--progress', 100*b);
+    ready = true;
+  }
+  view.addEventListener ('scroll', () =>
+  {
+    if (ready)
+    {
+      requestAnimationFrame (scrollUpdate);
+      ready = false;
+    }
+  });
+</script>

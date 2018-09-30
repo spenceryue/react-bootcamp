@@ -10,12 +10,12 @@ class Loader extends React.Component
   sizeCanvas ()
   {
     const canvas = document.getElementById (this.canvas_id);
-    const {width, height} = canvas.getBoundingClientRect();
+    const {width, height} = canvas.getBoundingClientRect ();
     const scale = window.devicePixelRatio;
     [canvas.width, canvas.height] = [ scale * width, scale * height ];
-    const ctx = canvas.getContext('2d');
-    ctx.resetTransform();
-    ctx.scale(scale, scale);
+    const ctx = canvas.getContext ('2d');
+    ctx.resetTransform ();
+    ctx.scale (scale, scale);
 
     return {width, height};
   }
@@ -35,38 +35,38 @@ class Loader extends React.Component
   } = {})
   {
     const canvas = document.getElementById (this.canvas_id);
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext ('2d');
     const [center_x, center_y] = [ this.WIDTH / 2, this.HEIGHT / 2 ];
     if (clearRect)
     {
-      ctx.clearRect(0, 0, this.WIDTH, this.HEIGHT);
+      ctx.clearRect (0, 0, this.WIDTH, this.HEIGHT);
     }
     ctx.strokeStyle = strokeStyle;
-    ctx.beginPath();
-    ctx.arc(center_x, center_y, radius, start, end);
-    ctx.stroke();
+    ctx.beginPath ();
+    ctx.arc (center_x, center_y, radius, start, end);
+    ctx.stroke ();
 
     if (drawPoints)
     {
       const [start_x, start_y] = [
-        radius * Math.cos(start) + center_x,
-        radius * Math.sin(start) + center_y,
+        radius * Math.cos (start) + center_x,
+        radius * Math.sin (start) + center_y,
       ];
-      ctx.beginPath();
-      ctx.arc(start_x, start_y, 2, 0, 2 * Math.PI)
+      ctx.beginPath ();
+      ctx.arc (start_x, start_y, 2, 0, 2 * Math.PI)
       ctx.fillStyle = 'green';
-      ctx.fill();
-      ctx.stroke();
+      ctx.fill ();
+      ctx.stroke ();
 
       const [end_x, end_y] = [
-        radius * Math.cos(end) + center_x,
-        radius * Math.sin(end) + center_y,
+        radius * Math.cos (end) + center_x,
+        radius * Math.sin (end) + center_y,
       ];
-      ctx.beginPath();
-      ctx.arc(end_x, end_y, 2, 0, 2 * Math.PI)
+      ctx.beginPath ();
+      ctx.arc (end_x, end_y, 2, 0, 2 * Math.PI)
       ctx.fillStyle = 'red';
-      ctx.fill();
-      ctx.stroke();
+      ctx.fill ();
+      ctx.stroke ();
     }
   }
 
@@ -81,7 +81,7 @@ class Loader extends React.Component
   } = {})
   {
     const radians = 2 * Math.PI;
-    const hann = (x) => Math.sin(Math.PI * (x + .25 - .8 / 2 / Math.PI)) ** 2 / Math.PI * .8;
+    const hann = (x) => Math.sin (Math.PI * (x + .25 - .8 / 2 / Math.PI)) ** 2 / Math.PI * .8;
 
     let end = 0;
     let focus = 0; // index of highlighted ring
@@ -111,21 +111,21 @@ class Loader extends React.Component
           end : end_angle + dx * (i / N) + i / N * 3,
           clearRect : false,
           radius : this.RADIUS * (1 - i / N),
-          strokeStyle : (N - Math.abs(focus - N) >= i)
+          strokeStyle : (N - Math.abs (focus - N) >= i)
                             ? highlightColor (opacity)
                             : this.GRAY (opacity),
         });
       }
 
       // refocus
-      if (end % ~~(refocusEvery) == 0)
+      if (end % ~~ (refocusEvery) == 0)
       {
         // console.log (N - Math.abs (focus - N))
         focus = (focus + 1) % (2 * N);
       }
     };
 
-    ID = window.setInterval(animate, 17);
+    ID = window.setInterval (animate, 17);
     return ID;
   }
 
@@ -133,7 +133,7 @@ class Loader extends React.Component
   {
     const {width, height} = this.sizeCanvas ();
     [this.WIDTH, this.HEIGHT] = [width, height];
-    this.RADIUS = Math.min(this.WIDTH / 2, this.HEIGHT / 2) * .9;
+    this.RADIUS = Math.min (this.WIDTH / 2, this.HEIGHT / 2) * .9;
     this.interval = this.startAnimation (this.props.animation);
   }
 
